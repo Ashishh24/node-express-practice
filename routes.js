@@ -49,7 +49,7 @@ app.use("/user",
     (req, res, next) => {
         console.log("second route handler");
         res.send("Reponse 2");
-        // next();//Error, if again next called without res.send()
+        // next(); //Error, if again next called without res.send()
     }
 )
 
