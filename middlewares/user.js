@@ -4,6 +4,7 @@ const userAuth = (req, res, next) => {
     if(!isUserAuthorized){
         res.status(401).send("Unautorized User");
     }
+    
     else{
         next();
     }
