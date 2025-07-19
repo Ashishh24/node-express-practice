@@ -7,41 +7,41 @@ const User = require("./models/schema");
 
 app.use(express.json()); // a middleware that converts all json to js object
 
-// app.post("/signup", async (req, res) => {
-//     const user = new User(req.body);
-//     try {
-//         await user.save();
-//         res.send("USer added successfully!!");
-//     } catch(err) {
-//         res.status(402).send("USer not added");
-//     }
-// });
+app.post("/signup", async (req, res) => {
+    const user = new User(req.body);
+    try {
+        await user.save();
+        res.send("USer added successfully!!");
+    } catch(err) {
+        res.status(402).send("USer not added");
+    }
+});
 
-// app.get("/user", async (req, res) => {
-//     const userlastname = req.body.lastName;
+app.get("/user", async (req, res) => {
+    const userlastname = req.body.lastName;
 
-//     try{
-//         const users = await User.find({lastName: userlastname});
-//         if(users.length === 0) {
-//             res.status(404).send("User not found!")
-//         }
-//         res.send(users);
-//     } catch(err) {
-//         res.status(400).send("something went wrong!!");
-//     }
-// });
+    try{
+        const users = await User.find({lastName: userlastname});
+        if(users.length === 0) {
+            res.status(404).send("User not found!")
+        }
+        res.send(users);
+    } catch(err) {
+        res.status(400).send("something went wrong!!");
+    }
+});
 
-// app.delete("/user", async (req, res) => {
-//     const userID = req.body.id;
-//     try {
-//         console.log(userID);
+app.delete("/user", async (req, res) => {
+    const userID = req.body.id;
+    try {
+        console.log(userID);
         
-//         const user = await User.findByIdAndDelete(userID);
-//         res.send("User deleted successfully!")
-//     } catch(err) {
-//         res.status(400).send("something went wrong!!");
-//     }
-// })
+        const user = await User.findByIdAndDelete(userID);
+        res.send("User deleted successfully!")
+    } catch(err) {
+        res.status(400).send("something went wrong!!");
+    }
+})
 
 app.patch("/user", async (req, res) => {
     const userID = req.body.id;
