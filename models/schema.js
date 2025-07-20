@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 var validator = require('validator');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 function get18YearsAgoDate() {
   const today = new Date();
@@ -75,6 +77,19 @@ const schema = mongoose.Schema({
 {
     timestamps: true,
 });
+
+schema.methods.getJWT = function() {
+    const user = this;
+    const jwtToken = jwt.sign({ _id: user._id }, 'Link@in@1804', { expiresIn: '1d' });
+    return jwtToken;
+}
+
+schema.methods.validatePassword = async function(passwordByUserInput) {
+    const user = this;
+    const passowrdHash = user.password
+    const isPasswordValid = await bcrypt.compare(passwordByUserInput, passowrdHash);
+    return isPasswordValid;
+}
 
 const User = mongoose.model("User", schema);
 
