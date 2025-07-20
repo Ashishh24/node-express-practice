@@ -10,7 +10,7 @@ const app = express();
 const User = require("./models/schema");
 
 app.use(express.json()); // a middleware that converts all json to js object
-app.use(cookieParser()); //Get cookie from web
+app.use(cookieParser()); // Get cookie from web
 
 app.post("/login", async (req, res) => {
     try{
@@ -25,8 +25,12 @@ app.post("/login", async (req, res) => {
             throw new Error("Invalid password!!");
         }
         else{
-            var token = jwt.sign({ _id: isUser._id }, 'Link@in@1804');
-            res.cookie("token", token);
+            var token = jwt.sign({ _id: isUser._id }, 'Link@in@1804', {
+                expiresIn: '1d' // token expiry time
+            });
+            res.cookie("token", token, {
+                expires: new Date(Date.now() + 3600000), // cookie erpiry time
+            });
             res.send("Login Successful!!!!😊")
         }
     }

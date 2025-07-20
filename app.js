@@ -3,6 +3,7 @@ const connectDB = require("./database");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
+const {userAuth} = require("./middlewares/user");
 
 const app = express();
 
