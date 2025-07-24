@@ -12,10 +12,12 @@ app.use(cookieParser()); //Get cookie from web
 const authRouter = require("./routesContainer/auth");
 const profileRouter = require("./routesContainer/profile");
 const requestRouter = require("./routesContainer/request");
+const userRouter = require("./routesContainer/user");
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestRouter);
+app.use("/", userRouter);
 
 connectDB().then(() => {
     console.log("DB connected :)");
